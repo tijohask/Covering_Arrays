@@ -57,12 +57,13 @@ def check_interactions(data, num_inter, num_level):
   #if we made it through the whole for loop, return true
   return True
 
+
 num_inter = int(sys.argv[1])
 num_k = int(sys.argv[2])
 num_level = int(sys.argv[3])
 
 full = create_full_array(num_k, num_level)
-cov_size = find_size(num_inter, num_k, num_level)
+cov_size = min(find_size(num_inter, num_k, num_level), full.shape[0])
 
 running = 100
 test = []
@@ -81,6 +82,7 @@ while(running > 0):
     #else, the iterations if we have a working test
     if(working_test.shape[0] != 0):
       running = running - 1
+
 print(working_test)
 print(working_test.shape)
 
