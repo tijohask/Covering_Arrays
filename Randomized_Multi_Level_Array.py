@@ -2,7 +2,6 @@ import sys
 import numpy
 import random
 import itertools
-#from itertools import combinations
 
 #Found on stack overflow
 def choose(n, k):
@@ -51,19 +50,16 @@ def find_size(t, k, v):
 #maximum value of the input array, then remove the ones that don't fit our
 #established pattern.
 def create_full_array(input_array):
+  give = []
+  for i in k_level:
+    give.append(list(numpy.arange(i)))
   arr = []
-  for i in itertools.product(numpy.arange(max(input_array)), repeat=len(input_array)):
-    arr_add = True
-    for x in range(len(input_array)):
-      if(input_array[x] <= i[x]):
-        arr_add = False
-        break
-    if(arr_add):
-      arr.append(list(i))
+  for i in itertools.product(*give):
+    arr.append(list(i))
   return numpy.asarray(arr)
 
 #Get every combination, check to make sure the right number of unique
-  #elements are in there.
+  #interactions are in there.
   #If there are enough in all, then success!
   #else, false.
 def check_interactions(test, k_level, num_inter):
@@ -86,8 +82,9 @@ def create_test_array(array, size):
   #Sorted for readability
   #random.sample to prevent duplicate elements
   #min to make sure that we don't run into a sample error
-  ii = sorted(random.sample(range(array.shape[0]), min(size, array.shape[0])))
+  ii = sorted(random.sample(range(array.shape[0]), size))
   return array[ii,:]
+
 
 
 #Take the system arguments
@@ -98,7 +95,6 @@ num_inter = int(sys.argv[1])
 k_level = sys.argv[2]
 k_level = k_level.split(',')
 k_level = numpy.asarray(sorted(list(map(int, k_level))))
-
 
 print(k_level)
 print("Max Level: " + str(max(k_level)))
