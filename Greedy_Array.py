@@ -6,7 +6,7 @@ import itertools
 
 #Code returns a 2D array, giving every row gotten by counting.
   #uses the input array as a base for its indices
-#Example: 2,3,5
+#Example: 2,2,3
 #Returns:
 """
  [0 0 0]
@@ -81,7 +81,7 @@ k_level = numpy.asarray(sorted(list(map(int, k_level))))
 full = create_full_array(k_level)
 test = create_test_array(full, 8)
 
-print(numpy.sort(check_interactions(full, k_level, num_inter)))
+print(check_interactions(full, k_level, num_inter))
 
 
 
