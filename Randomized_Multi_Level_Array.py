@@ -2,6 +2,7 @@ import sys
 import numpy
 import random
 import itertools
+import time
 
 #Found on stack overflow
 def choose(n, k):
@@ -86,7 +87,7 @@ def create_test_array(array, size):
   return array[ii,:]
 
 
-
+start = time.process_time()
 #Take the system arguments
 #get the desired number of interactions
 num_inter = int(sys.argv[1])
@@ -122,12 +123,12 @@ while(running > 0):
       running = running - 1
 
 
-print(numpy.unique(working_test[:,-num_inter:], axis=0))
+#print(numpy.unique(working_test[:,-num_inter:], axis=0))
 print(working_test)
-print(full.shape)
 print(working_test.shape)
-
-
+print(full.shape)
+end = time.process_time()
+print("Elapsed Time: " + str(end - start))
 
 
 
