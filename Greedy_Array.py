@@ -22,12 +22,11 @@ import time
  [1 1 2]
 
 """
-#General algorithm is to iteratively create all possible tuples up to the
-#maximum value of the input array, then remove the ones that don't fit our
-#established pattern.
+#General algorithm is to use itertools [behaving like nested for loops]
+#to iteratively create every row in the product
 def create_full_array(input_array):
   give = []
-  for i in k_level:
+  for i in input_array:
     give.append(list(numpy.arange(i)))
   arr = []
   for i in itertools.product(*give):
@@ -40,21 +39,45 @@ def create_full_array(input_array):
   #If there are enough in all, then success!
   #else, false.
 def check_interactions(full, k_level, num_inter):
+  #Start our algorithm off with the first row declared.
+  #If we didn't do this, the for loop would declare it anyway.
   cur = numpy.asarray([full[0,:]])
   full = numpy.delete(full, 0, 0)
+
+  #We know that 
+    #len(covering array) <= len(full array)
+  #So declare that we will run through the full array
   for x in range(full.shape[0]):
+    #Declare an array of zeros equal in size to our full array.
     buckets = [0]*full.shape[0]
+    
     #get all existing combinations (interactions) from the data
     for p in itertools.combinations(numpy.arange(len(k_level)), num_inter):
+      
       #If check contains the interaction, then buckets will not increment
       check = numpy.unique(cur[:,p], axis=0)
+      #If numpy.unique shows that all interactions have been applied,
+      #Then do nothing
+      #Code here
+      
       for i in range(full.shape[0]):
+        #print((check == full[i,p]).any(1))
+        #print(full[i,p])
         buckets[i] = buckets[i] + int( not (check == full[i,p]).all(1).any() )
         #print(not (check == full[i,p]).all(1).any())
+
+    #If all interactions are accounted for, then return what we have
     if(max(buckets) == 0):
       return cur
+    
+    #Else,
+    #Find the first and largest value of buckets
     idx = buckets.index(max(buckets))
+    
+    #Append the associated value to cur
     cur = numpy.append(cur, [full[idx]], axis=0)
+    
+    #And delete the associated value from full
     full = numpy.delete(full, buckets.index(max(buckets)), 0)
 
 start = time.process_time()
