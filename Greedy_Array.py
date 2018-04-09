@@ -100,11 +100,10 @@ k_level = numpy.asarray(sorted(list(map(int, k_level))))
 full = create_full_array(k_level)
 
 greedy_array = check_interactions(full, k_level, num_inter)
-print(greedy_array)
 
 for x in range(greedy_array.shape[1], 0, -1):
-  greedy_array = greedy_array[numpy.argsort(greedy_array[:,x-1])]
-
+  greedy_array = greedy_array[numpy.argsort(greedy_array[:,x-1], kind='mergesort')]
+  
 print(greedy_array)
 
 print(greedy_array.shape)
