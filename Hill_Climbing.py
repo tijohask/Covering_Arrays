@@ -30,7 +30,7 @@ def find_size(t, k, v):
 
 #Code returns a 2D array, giving every row gotten by counting.
   #uses the input array as a base for its indices
-#Example: 2,3,5
+#Example: 2,2,3
 #Returns:
 """
  [0 0 0]
@@ -111,18 +111,21 @@ def create_cover(k_level, num_inter):
   test = []
   working_test = numpy.arange(0)
 
-  while(running):
+  while(True):
     #Create a new test array
     test = create_test_array(full, cov_size)
     #check if all interactions are represented in this test array
     if(check_interactions(test, k_level, num_inter)):
       #save the working test
-      cov_size = cov_size - 1
+      #cov_size = cov_size - 1
       working_test = test
+      break
     else:
       #else, iterate down if we have a working test
-      if(working_test.shape[0] != 0):
-        running = running - 1
+      running = running - 1
+      if(running == 0):
+        cov_size = min(mul_array(k_level), cov_size+1)
+        running = 100
   
   return working_test
 
@@ -132,11 +135,13 @@ def mul_array(k_level):
     mul = mul*k_level[i]
   return mul
 
-#Recursively improve
-def hill_climbing(pre_hill, k_level, num_inter):
-  for i in range(len(pre_hill)):
+#Recursively improve the CA by finding the rows that can be removed 
+#  and removing them.
+def hill_climbing(pre_hill, k_level, num_inter, step):
+  for i in range(step, len(pre_hill)):
     if(check_interactions(numpy.delete(pre_hill, i, 0), k_level, num_inter)):
-      return hill_climbing(numpy.delete(pre_hill, i, 0), k_level, num_inter)
+      #print("We have to go deeper..." + str(i))
+      return hill_climbing(numpy.delete(pre_hill, i, 0), k_level, num_inter, i)
   return pre_hill
 
 #END METHOD
@@ -149,14 +154,15 @@ num_inter, k_level = setup()
 
 pre_hill = create_cover(k_level, num_inter)
 
-#print(find_size( num_inter, len(k_level), max(k_level) ))
 print(pre_hill)
 print(pre_hill.shape)
-post_hill = hill_climbing(pre_hill, k_level, num_inter)
+
+post_hill = hill_climbing(pre_hill, k_level, num_inter, 0)
+
 print(post_hill)
 print(post_hill.shape)
-print(mul_array(k_level))
-#print(create_full_array(k_level))
+
+print((mul_array(k_level), len(k_level)))
 end = time.process_time()
 print("Elapsed Time: " + str(end - start))
 
