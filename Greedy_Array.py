@@ -85,7 +85,7 @@ def check_interactions(full, k_level, num_inter):
     cur = numpy.append(cur, [full[idx]], axis=0)
     
     #And delete the associated value from full
-    full = numpy.delete(full, buckets.index(max(buckets)), 0)
+    full = numpy.delete(full, idx, 0)
 
 start = time.process_time()
 #Take the system arguments
