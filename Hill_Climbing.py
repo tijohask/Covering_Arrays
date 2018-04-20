@@ -165,6 +165,3 @@ print(post_hill.shape)
 print((mul_array(k_level), len(k_level)))
 end = time.process_time()
 print("Elapsed Time: " + str(end - start))
-
-
-
