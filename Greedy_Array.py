@@ -33,7 +33,6 @@ def create_full_array(input_array):
     arr.append(list(i))
   return numpy.asarray(arr)
 
-
 #Get every combination, check to make sure the right number of unique
   #interactions are in there.
   #If there are enough in all, then success!
