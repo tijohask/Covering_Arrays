@@ -86,6 +86,34 @@ def create_test_array(array, size):
   ii = sorted(random.sample(range(array.shape[0]), size))
   return array[ii,:]
 
+def create_cover(k_level, num_inter):
+  full = create_full_array(k_level)
+  cov_size = min( find_size( num_inter, len(k_level), max(k_level) ), full.shape[0] )
+
+  running = 100
+  test = []
+  working_test = numpy.arange(0)
+
+  while(True):
+    #Create a new test array
+    test = create_test_array(full, cov_size)
+    #check if all interactions are represented in this test array
+    if(check_interactions(test, k_level, num_inter)):
+      #save the working test
+      #cov_size = cov_size - 1
+      working_test = test
+      break
+    else:
+      #else, iterate down if we have a working test
+      running = running - 1
+      if(running == 0):
+        cov_size = min(mul_array(k_level), cov_size+1)
+        running = 100
+  
+  return working_test
+
+#END METHODS
+#BEGIN CODE
 
 start = time.process_time()
 #Take the system arguments
@@ -104,6 +132,9 @@ print("Length of array: " + str(len(k_level)))
 full = create_full_array(k_level)
 cov_size = min( find_size( num_inter, len(k_level), max(k_level) ), full.shape[0] )
 
+working_test = create_cover(k_level, num_inter)
+
+"""
 running = 100
 test = []
 working_test = numpy.arange(0)
@@ -121,7 +152,7 @@ while(running > 0):
     #else, iterate down if we have a working test
     if(working_test.shape[0] != 0):
       running = running - 1
-
+"""
 
 #print(numpy.unique(working_test[:,-num_inter:], axis=0))
 print(working_test)
