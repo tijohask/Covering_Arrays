@@ -38,22 +38,19 @@ def create_full_array(input_array):
   #interactions are in there.
   #If there are enough in all, then success!
   #else, false.
-def check_interactions(full, k_level, num_inter):
+def greedy_generation(full, k_level, num_inter):
   #Start our algorithm off with the first row declared.
   #If we didn't do this, the for loop would declare it anyway.
   cur = numpy.asarray([full[0,:]])
   full = numpy.delete(full, 0, 0)
-
   #We know that 
     #len(covering array) <= len(full array)
   #So declare that we will run through the full array
   for x in range(full.shape[0]):
     #Declare an array of zeros equal in size to our full array.
     buckets = [0]*full.shape[0]
-    
     #get all existing combinations (interactions) from the data
     for p in itertools.combinations(numpy.arange(len(k_level)), num_inter):
-      
       #If check contains the interaction, then buckets will not increment
       check = numpy.unique(cur[:,p], axis=0)
       #If numpy.unique shows that all interactions have been applied,
@@ -61,31 +58,27 @@ def check_interactions(full, k_level, num_inter):
       mul = 1
       for i in p:
         mul = mul * k_level[i]
-      
       #if all interactions of a specific slice have been found, then do nothing
       if(mul == len(check)):
         continue
-      
-      #
       for i in range(full.shape[0]):
         #print((check == full[i,p]).any(1))
         #print(full[i,p])
         buckets[i] = buckets[i] + int( not (check == full[i,p]).all(1).any() )
         #print(not (check == full[i,p]).all(1).any())
-
     #If all interactions are accounted for, then return what we have
     if(max(buckets) == 0):
       return cur
-    
     #Else,
     #Find the first and largest value of buckets
     idx = buckets.index(max(buckets))
-    
     #Append the associated value to cur
     cur = numpy.append(cur, [full[idx]], axis=0)
-    
     #And delete the associated value from full
     full = numpy.delete(full, idx, 0)
+
+#END METHOD
+#BEGIN CODE
 
 start = time.process_time()
 #Take the system arguments
@@ -99,16 +92,13 @@ k_level = numpy.asarray(sorted(list(map(int, k_level))))
 
 full = create_full_array(k_level)
 
-greedy_array = check_interactions(full, k_level, num_inter)
-
+greedy_array = greedy_generation(full, k_level, num_inter)
 for x in range(greedy_array.shape[1], 0, -1):
   greedy_array = greedy_array[numpy.argsort(greedy_array[:,x-1], kind='mergesort')]
   
 print(greedy_array)
-
 print(greedy_array.shape)
+
 print(full.shape)
 end = time.process_time()
 print("Elapsed Time: " + str(end - start))
-
-
