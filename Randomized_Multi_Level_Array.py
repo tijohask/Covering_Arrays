@@ -93,7 +93,7 @@ def create_cover(k_level, num_inter):
   running = 100
   test = []
   working_test = numpy.arange(0)
-
+  print(working_test.shape[0])
   while(True):
     #Create a new test array
     test = create_test_array(full, cov_size)
@@ -109,7 +109,7 @@ def create_cover(k_level, num_inter):
       if(running == 0):
         cov_size = min(mul_array(k_level), cov_size+1)
         running = 100
-  
+  print(working_test.shape)
   return working_test
 
 #END METHODS
