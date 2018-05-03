@@ -44,7 +44,9 @@ def create_test_array(array, size):
 #Create a covering array by putting together random rows from the 
 #full array and checking whether they form a covering array.
 def create_cover(k_level, num_inter):
+  #get the full array that we can take random elements out of
   full = create_full_array(k_level)
+  #get the predicted covering array size
   cov_size = min( find_size( num_inter, len(k_level), max(k_level) ), full.shape[0] )
   
   running = 100
@@ -218,6 +220,7 @@ def main():
   #Find the total number of combinations possible
   for i in k_level:
     total = total * i
+  #get the covering array
   give = switch(k_level, num_inter)
   print(give)
   print(str(give.shape[1]) + " Elements in row.")
@@ -226,6 +229,7 @@ def main():
   end = time.process_time()
   print("Elapsed Time: " + str(end - start))
 
+#Choose which of the algorithms to use based on the third argument.
 def switch(k_level, num_inter):
   check = int(sys.argv[3])
   full = create_full_array(k_level)
