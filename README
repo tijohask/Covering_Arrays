@@ -1,0 +1,51 @@
+Master_File.py
+Requires numpy to be available to the python interpreter. All other libraries come standard.
+
+Generates a covering array based on the input parameters.
+Example:
+$python3 Master_File.py  3  2,2,2,2,3,2  2
+Greedy from Full
+[[0 0 0 0 0 0]
+ [0 0 0 0 0 1]
+ [0 0 0 0 1 2]
+ [0 0 1 1 0 0]
+ [0 0 1 1 0 2]
+ [0 0 1 1 1 1]
+ [0 1 0 1 0 2]
+ [0 1 1 0 0 1]
+ [0 1 1 0 1 0]
+ [1 0 0 1 0 1]
+ [1 0 0 1 1 0]
+ [1 0 1 0 0 2]
+ [1 1 0 0 0 0]
+ [1 1 0 0 0 2]
+ [1 1 0 0 1 1]
+ [1 1 1 1 0 0]
+ [1 1 1 1 0 1]
+ [1 1 1 1 1 2]]
+6 Elements in row.
+18 Rows in covering array.
+96 Rows possible.
+Elapsed Time: 1.1550187840000001
+
+1. Use the python3 interpreter
+2. Call the file that you want to use
+3. First argument is the number of interactions you want your covering array to have
+4. Second argument is the array with the levels for each column
+    Will be sorted in code from lowest to highest automatically.
+5. Third and final argument will be the algorithm that the user wants to use for this instance
+  1 will be for Randomized generation
+  2 will be for Greedy generation (from a full array)
+  3 will be for Hill Climbing generation (from a full array)
+  4 will be for Greedy generation (from a randomized covering array)
+  5 will be for Hill Climbing generation (from a randomized covering array)
+
+Output will include:
+  The algorithm chosen by the user
+  The covering array found
+  How many elements are in the rows
+  How many rows are in the covering array
+  How many rows total are possible
+  The amount of time needed to find all this information
+
+
