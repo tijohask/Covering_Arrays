@@ -46,6 +46,6 @@ Output will include:
   How many elements are in the rows
   How many rows are in the covering array
   How many rows total are possible
-  The amount of time needed to find all this information
+  The amount of time needed to run this program
 
 

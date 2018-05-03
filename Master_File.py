@@ -213,19 +213,21 @@ def main():
   start = time.process_time()
   #get the number of interactions
   num_inter = int(sys.argv[1])
-  #get the array
+  #get the starting array
   k_level = sys.argv[2].split(',')
   k_level = numpy.asarray(sorted(list(map(int, k_level))))
   total = 1
   #Find the total number of combinations possible
   for i in k_level:
     total = total * i
-  #get the covering array
+  #get the covering array and print it
   give = switch(k_level, num_inter)
   print(give)
+  #print information about the covering array found
   print(str(give.shape[1]) + " Elements in row.")
   print(str(give.shape[0]) + " Rows in covering array.")
   print(str(total) + " Rows possible.")
+  #find and print the time elapsed
   end = time.process_time()
   print("Elapsed Time: " + str(end - start))
 
