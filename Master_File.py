@@ -90,7 +90,7 @@ def greedy_generation(full, k_level, num_inter):
   cur = numpy.asarray([full[0,:]])
   full = numpy.delete(full, 0, 0)
   #We know that 
-    #len(covering array) <= len(full array)
+  #  len(covering array) <= len(full array)
   #So declare that we will run through the full array
   for x in range(full.shape[0]):
     #Declare an array of zeros equal in size to our full array.
@@ -130,9 +130,10 @@ def greedy_generation(full, k_level, num_inter):
 ###############################################################
 
 #Recursively improve the CA by finding the rows that can be removed 
-#  and removing them.
+  #and removing them.
 def hill_climbing(pre_hill, k_level, num_inter, step):
   #step is used to keep track of all the rows we have checked
+  #  so we don't waste resources rechecking them
   #Iterate through every row in the array
   for i in range(step, len(pre_hill)):
     #if it is found that a row can be removed...
@@ -208,6 +209,13 @@ def check_interactions(test, k_level, num_inter):
 #Begin main
 ###############################################################
 
+#Will print out 
+#  The generation algorithm to be used
+#  The covering array
+#  The number of elements per row
+#  The number of rows in the covering array
+#  The number of rows possible
+#  The amount of time needed to find all this information
 def main():
   #Start performance timer
   start = time.process_time()
