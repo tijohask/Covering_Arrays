@@ -38,7 +38,7 @@ Elapsed Time: 1.1550187840000001
 4. Second argument is the array with the levels for each column
     Expected to be a series of positive integers seperated by commas with no whitespace between them
     Will be sorted in code from lowest to highest automatically.
-5. Third and final argument will be an integer representing the algorithm that the user wants to use for this instance
+5. Third and final argument will be an integer representing the algorithm that the user wants to use for this instance (only used in Master_File.py)
   1 will be for Randomized generation
   2 will be for Greedy generation (from a full array)
   3 will be for Hill Climbing generation (from a full array)
