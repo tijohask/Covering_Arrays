@@ -1,9 +1,12 @@
 Master_File.py
 Requires numpy to be available to the python interpreter. All other libraries come standard in python3. Numpy is available on tesla.cs.iupui.edu, so no installation script will be required.
 
+As it stands, Master_File.py is the only program you need to pay attention to, as Master_File serves as a compilation of all the other generation algorithms.
+
 Generates a covering array based on the input parameters.
 Example:
 $python3 Master_File.py  3  2,2,2,2,3,2  2
+
 Greedy from Full
 [[0 0 0 0 0 0]
  [0 0 0 0 0 1]
@@ -50,4 +53,5 @@ Output will include:
   How many rows total are possible
   The amount of time needed to run this program
 
+I left an example script with the source code. It runs the same program, but using all 5 unique algorithms to demonstrate their different behaviors.
 
